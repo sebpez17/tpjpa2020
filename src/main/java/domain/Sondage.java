@@ -11,15 +11,16 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlElementWrapper;
+import javax.xml.bind.annotation.XmlRootElement;
 
 import org.hibernate.annotations.Tables;
 
-
-
 @Entity
 @Table(name = "SONDAGES")
+@XmlRootElement(name = "sondage")
 public class Sondage {
-
 
     @Id
     @GeneratedValue
@@ -41,6 +42,7 @@ public class Sondage {
     @OneToOne
     Choix choixSelectionne;
 
+    @XmlElement(name = "id")
     public long getId() {
         return id;
     }
@@ -49,6 +51,8 @@ public class Sondage {
         this.id = id;
     }
 
+    @XmlElementWrapper(name = "members")
+    @XmlElement(name = "membre")
     public List<User> getParticipants() {
         return participants;
     }
@@ -57,6 +61,7 @@ public class Sondage {
         this.participants = participants;
     }
 
+    @XmlElement(name = "host")
     public User getOrganisateur() {
         return organisateur;
     }
@@ -65,6 +70,8 @@ public class Sondage {
         this.organisateur = organisateur;
     }
 
+    @XmlElementWrapper(name = "choices")
+    @XmlElement(name = "choice")
     public List<Choix> getChoixpossible() {
         return choixpossible;
     }
@@ -73,6 +80,7 @@ public class Sondage {
         this.choixpossible = choixpossible;
     }
 
+    @XmlElement(name = "selectedChoice")
     public Choix getChoixSelectionne() {
         return choixSelectionne;
     }
@@ -81,6 +89,7 @@ public class Sondage {
         this.choixSelectionne = choixSelectionne;
     }
 
+    @XmlElement(name = "title")
     public String getTitre() {
         return titre;
     }
@@ -89,6 +98,7 @@ public class Sondage {
         this.titre = titre;
     }
 
+    @XmlElement(name = "location")
     public String getLieu() {
         return lieu;
     }
